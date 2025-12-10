@@ -1,6 +1,7 @@
 import { IsNotEmpty } from "class-validator";
-import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm"
-import { Tema } from "../../tema/entities/tema.entity";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm"
+import { Tema } from "../../temas/entities/tema.entity";
+import { Usuario } from "../../usuario/entities/usuario.entity";
 
 @Entity({name:'tb_postagens'})  // Indicando que a classe é uma Entidade/Model - Converte em uma tabela no banco de dados
 export class Postagem {
@@ -23,5 +24,10 @@ export class Postagem {
         onDelete: "CASCADE"
     })
     tema: Tema
+    // Indica o lado MUITO do relacionamento, indicando que esse campo se conecta ao campo Postagem da Model Usuario
+    @ManyToOne(() => Usuario, (usuario) => usuario.postagem, {
+        onDelete: "CASCADE"
+    })
+    usuario: Usuario
 
 }
