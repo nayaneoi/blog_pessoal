@@ -2,8 +2,11 @@ import { Body, Controller, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post,
 import { UsuarioService } from "../services/usuario.service";
 import { Usuario } from "../entities/usuario.entity";
 import { JwtAuthGuard } from "../../auth/guard/jwt-auth.guard";
+import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 
+@ApiTags('Usuario') // Decorator que indica um título, para agrupar todas as requisições de Usuário
 @Controller("/usuarios")
+@ApiBearerAuth()    // Decorator que indica para o Swagger que essa controller usar autorização
 export class UsuarioController {
 
     constructor(private readonly usuarioService: UsuarioService) { }
